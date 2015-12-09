@@ -143,6 +143,13 @@ class FoodRequestTableViewController: UITableViewController {
         }
     }
     
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        performSegueWithIdentifier("foodDetailSegue", sender: self)
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -179,6 +186,11 @@ class FoodRequestTableViewController: UITableViewController {
     }
     */
 
+    
+    
+    
+ 
+    
     /*
     // MARK: - Navigation
 

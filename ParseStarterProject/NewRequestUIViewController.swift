@@ -172,20 +172,28 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
             }
             
             var subthoroughfare = ""
+            var thoroughfare = ""
             if placemarks?.count > 0 {
                 
                 if let p = placemarks?.first {
                     
                     
                     self.locationManager.stopUpdatingLocation()
+                    
+                    print(p)
 
                     if p.subThoroughfare != nil {
                         
                        subthoroughfare = p.subThoroughfare!
                     
                     }
+                    
+                    if p.thoroughfare != nil {
                         
-                    userAddress = "\(subthoroughfare) \(p.thoroughfare!)"
+                        thoroughfare = p.thoroughfare!
+                        
+                    }
+                    userAddress = "\(subthoroughfare) \(thoroughfare)"
                     userCity = p.locality!
                     userState = p.administrativeArea!
                     userCountry = p.country!

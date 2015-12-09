@@ -46,7 +46,7 @@ class MyRequestTableViewController: UITableViewController {
                     
                     self.tableView.reloadData()
                     
-                    print(object)
+                   
                 }
             }
             

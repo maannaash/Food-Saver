@@ -16,6 +16,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+       
         let latitude:CLLocationDegrees = userLatitude
         let longitude:CLLocationDegrees = userLongitude
         let latitudeDelta:CLLocationDegrees = 0.2
@@ -34,6 +36,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         map.addAnnotation(annotation)
         
         
+       // var annview:MKAnnotationView = MKAnnotationView()
+       // annview.annotation = annotation
+       // annview.image = UIImage(named: "home.png")
+       // annview.canShowCallout = true
+       // annview.enabled = true
         
         var allLocations = [CLLocationCoordinate2D]()
         
@@ -61,6 +68,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    
     
 
     /*
