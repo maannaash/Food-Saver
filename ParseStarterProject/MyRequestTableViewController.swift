@@ -98,7 +98,36 @@ class MyRequestTableViewController: UITableViewController {
         
         mycell.foodName.text = foodname[indexPath.row]
         mycell.servesLabel.text = serves[indexPath.row]
-        mycell.expiryLabel.text = String(expiry[indexPath.row])
+       // mycell.expiryLabel.text = String(expiry[indexPath.row])
+        
+        
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: NSDate(), toDate: expiry[indexPath.row], options: [])
+        
+        var daytext = ""
+        var hourtext = ""
+        
+        if components.day == 1{
+            daytext = " Day & "
+        }else {
+            daytext = " Days & "
+        }
+        
+        if components.hour == 1 {
+            hourtext = " Hour & "
+        }else{
+            hourtext = " Hours & "
+        }
+        
+        
+        if components.day > 0 {
+            mycell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
+        } else {
+            mycell.expiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
+            " Minutes remaining"
+        }
+
+        
 
         return mycell
     }
