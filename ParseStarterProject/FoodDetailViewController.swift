@@ -35,28 +35,16 @@ class FoodDetailViewController: UIViewController {
     
     @IBOutlet var postedState: UILabel!
     
+    @IBOutlet var statusLabel: UILabel!
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        /*
-        var foodname = [String]()
-        var serves = [String]()
-        var expiry = [NSDate]()
-        var foodstatus = [String]()
-        var imageFiles = [PFFile]()
-        var posteduser = [String]()
-        var phonenumber = [String]()
-        var fdescription = [String]()
-        var foodType = [String]()
-        var pAddress = [String]()
-        var pCity = [String]()
-        var pState = [String]()
-        var postedAt = [NSDate]()*/
-        
-        
+                
         print(currentIndex)
         print(postedAt)
         
@@ -70,6 +58,7 @@ class FoodDetailViewController: UIViewController {
         postedAddress.text = pAddress[currentIndex]
         postedCity.text = pCity[currentIndex]
         postedState.text = pState[currentIndex]
+        statusLabel.text = foodstatus[currentIndex]
         
         imageFiles[currentIndex].getDataInBackgroundWithBlock { (data , error ) -> Void in
             
@@ -101,11 +90,12 @@ class FoodDetailViewController: UIViewController {
         }
         
         
+        
         if components.day > 0 {
             postedExpiry.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
         } else {
             postedExpiry.text = String(components.hour) + hourtext + String(components.minute) +
-            " Minutes remaining"
+            " Mins remaining"
         
         }
         

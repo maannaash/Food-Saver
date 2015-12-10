@@ -154,7 +154,6 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        print(locations)
         
         var currentLocation:CLLocation = locations[0]
         var latitude = currentLocation.coordinate.latitude
@@ -180,7 +179,6 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
                     
                     self.locationManager.stopUpdatingLocation()
                     
-                    print(p)
 
                     if p.subThoroughfare != nil {
                         

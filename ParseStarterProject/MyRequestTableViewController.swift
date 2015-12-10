@@ -9,14 +9,28 @@
 import UIKit
 import Parse
 
+var myfoodname = [String]()
+var myserves = [String]()
+var myexpiry = [NSDate]()
+var mystatus = [String]()
+var myimageFiles = [PFFile]()
+var myposteduser = [String]()
+var myphonenumber = [String]()
+var myfdescription = [String]()
+var myfoodType = [String]()
+var mypAddress = [String]()
+var mypCity = [String]()
+var mypState = [String]()
+var mypostedAt = [NSDate]()
+var mypostObjectIds = [String]()
+
+var mycurrentIndex = 0
+
+
 class MyRequestTableViewController: UITableViewController {
 
     
-    var foodname = [String]()
-    var serves = [String]()
-    var expiry = [NSDate]()
-    var status = [String]()
-    var imageFiles = [PFFile]()
+    
     
     
     override func viewDidLoad() {
@@ -29,20 +43,39 @@ class MyRequestTableViewController: UITableViewController {
         
         myRequestSummaryQuery.findObjectsInBackgroundWithBlock { (objects , error ) -> Void in
             
-            self.foodname.removeAll(keepCapacity: true)
-            self.serves.removeAll(keepCapacity: true)
-            self.expiry.removeAll(keepCapacity: true)
-            self.status.removeAll(keepCapacity: true)
-            self.imageFiles.removeAll(keepCapacity: true)
+            myfoodname.removeAll(keepCapacity: true)
+            myserves.removeAll(keepCapacity: true)
+            myexpiry.removeAll(keepCapacity: true)
+            mystatus.removeAll(keepCapacity: true)
+            myimageFiles.removeAll(keepCapacity: true)
+            myposteduser.removeAll(keepCapacity: true)
+            myfdescription.removeAll(keepCapacity: true)
+            myfoodType.removeAll(keepCapacity: true)
+            mypAddress.removeAll(keepCapacity: true)
+            mypCity.removeAll(keepCapacity: true)
+            mypState.removeAll(keepCapacity: true)
+            myphonenumber.removeAll(keepCapacity: true)
+            mypostedAt.removeAll(keepCapacity: true)
+            mypostObjectIds.removeAll(keepCapacity: true)
             
             if let objects = objects {
                 
                 for object in objects {
                     
-                    self.foodname.append(object["foodname"]! as! String)
-                    self.serves.append(object["serves"]! as! String)
-                    self.expiry.append(object["expiry"]! as! NSDate)
-                    self.imageFiles.append(object["image"] as! PFFile)
+                    myfoodname.append(object["foodname"]! as! String)
+                    myserves.append(object["serves"]! as! String)
+                    myexpiry.append(object["expiry"]! as! NSDate)
+                    myimageFiles.append(object["image"] as! PFFile)
+                    mystatus.append(object["status"] as! String)
+                    myposteduser.append(object["contactname"] as! String)
+                    myfdescription.append(object["fooddescription"] as! String)
+                    //myfoodType.append(<#T##newElement: String##String#>)
+                    mypAddress.append(object["pickupaddress"] as! String)
+                    mypCity.append(object["pickupcity"] as! String)
+                    mypState.append(object["pickupstate"] as! String)
+                    myphonenumber.append(object["contactphone"] as! String)
+                    mypostedAt.append(object.createdAt! as! NSDate)
+                    mypostObjectIds.append(object.objectId!)
                     
                     self.tableView.reloadData()
                     
@@ -77,7 +110,7 @@ class MyRequestTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return foodname.count
+        return myfoodname.count
     }
 
     
@@ -87,7 +120,7 @@ class MyRequestTableViewController: UITableViewController {
         // Configure the cell...
         
         
-        imageFiles[indexPath.row].getDataInBackgroundWithBlock { (data , error ) -> Void in
+        myimageFiles[indexPath.row].getDataInBackgroundWithBlock { (data , error ) -> Void in
             
             if let downloadedImage = UIImage(data: data!) {
                 
@@ -96,13 +129,13 @@ class MyRequestTableViewController: UITableViewController {
         }
         
         
-        mycell.foodName.text = foodname[indexPath.row]
-        mycell.servesLabel.text = serves[indexPath.row]
-       // mycell.expiryLabel.text = String(expiry[indexPath.row])
+        mycell.foodName.text = myfoodname[indexPath.row]
+        mycell.servesLabel.text = myserves[indexPath.row]
+        mycell.statusLabel.text = String(mystatus[indexPath.row])
         
         
         let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: NSDate(), toDate: expiry[indexPath.row], options: [])
+        let components = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: NSDate(), toDate: myexpiry[indexPath.row], options: [])
         
         var daytext = ""
         var hourtext = ""
@@ -124,7 +157,7 @@ class MyRequestTableViewController: UITableViewController {
             mycell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
         } else {
             mycell.expiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
-            " Minutes remaining"
+            " Mins remaining"
         }
 
         
@@ -138,30 +171,59 @@ class MyRequestTableViewController: UITableViewController {
         
         myRequestSummaryQuery.findObjectsInBackgroundWithBlock { (objects , error ) -> Void in
             
-            self.foodname.removeAll(keepCapacity: true)
-            self.serves.removeAll(keepCapacity: true)
-            self.expiry.removeAll(keepCapacity: true)
-            self.status.removeAll(keepCapacity: true)
-            self.imageFiles.removeAll(keepCapacity: true)
+            myfoodname.removeAll(keepCapacity: true)
+            myserves.removeAll(keepCapacity: true)
+            myexpiry.removeAll(keepCapacity: true)
+            mystatus.removeAll(keepCapacity: true)
+            myimageFiles.removeAll(keepCapacity: true)
+            myposteduser.removeAll(keepCapacity: true)
+            myfdescription.removeAll(keepCapacity: true)
+            myfoodType.removeAll(keepCapacity: true)
+            mypAddress.removeAll(keepCapacity: true)
+            mypCity.removeAll(keepCapacity: true)
+            mypState.removeAll(keepCapacity: true)
+            myphonenumber.removeAll(keepCapacity: true)
+            mypostedAt.removeAll(keepCapacity: true)
+            mypostObjectIds.removeAll(keepCapacity: true)
             
             if let objects = objects {
                 
                 for object in objects {
                     
-                    self.foodname.append(object["foodname"]! as! String)
-                    self.serves.append(object["serves"]! as! String)
-                    self.expiry.append(object["expiry"]! as! NSDate)
-                    self.imageFiles.append(object["image"] as! PFFile)
+                    myfoodname.append(object["foodname"]! as! String)
+                    myserves.append(object["serves"]! as! String)
+                    myexpiry.append(object["expiry"]! as! NSDate)
+                    myimageFiles.append(object["image"] as! PFFile)
+                    mystatus.append(object["status"] as! String)
+                    myposteduser.append(object["contactname"] as! String)
+                    myfdescription.append(object["fooddescription"] as! String)
+                    //myfoodType.append(<#T##newElement: String##String#>)
+                    mypAddress.append(object["pickupaddress"] as! String)
+                    mypCity.append(object["pickupcity"] as! String)
+                    mypState.append(object["pickupstate"] as! String)
+                    myphonenumber.append(object["contactphone"] as! String)
+                    mypostedAt.append(object.createdAt! as! NSDate)
+                    mypostObjectIds.append(object.objectId!)
                     
                     self.tableView.reloadData()
                     
-                    print(object)
+                    
                 }
             }
             
         }
     }
 
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        performSegueWithIdentifier("myFoodDetailSegue", sender: self)
+        mycurrentIndex = indexPath.row
+    }
+
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

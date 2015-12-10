@@ -86,11 +86,11 @@ class FoodRequestTableViewController: UITableViewController {
                     postedAt.append(object.createdAt! as! NSDate)
                     
                     
-                    
                     self.tableView.reloadData()
                     
                     
                 }
+                
             }
 
         }
@@ -116,6 +116,7 @@ class FoodRequestTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        
         return foodname.count
     }
 
@@ -134,10 +135,12 @@ class FoodRequestTableViewController: UITableViewController {
             }
         }
         
+        print(indexPath.row)
+        print(foodstatus[indexPath.row])
         foodcell.foodName.text = foodname[indexPath.row]
         foodcell.servesLabel.text = serves[indexPath.row]
-        //foodcell.expiryLabel.text = String(expiry[indexPath.row])
-        //foodcell.statusLabel.text = foodstatus[indexPath.row]
+        foodcell.statusLabel.text = foodstatus[indexPath.row]
+        
         
         
         
@@ -166,7 +169,7 @@ class FoodRequestTableViewController: UITableViewController {
             foodcell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
         } else {
             foodcell.expiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
-            " Minutes remaining"
+            " Mins remaining"
         }
         
         return foodcell
@@ -185,17 +188,40 @@ class FoodRequestTableViewController: UITableViewController {
             foodname.removeAll(keepCapacity: true)
             serves.removeAll(keepCapacity: true)
             expiry.removeAll(keepCapacity: true)
-            imageFiles.removeAll(keepCapacity: true)
             foodstatus.removeAll(keepCapacity: true)
+            imageFiles.removeAll(keepCapacity: true)
+            posteduser.removeAll(keepCapacity: true)
+            fdescription.removeAll(keepCapacity: true)
+            foodType.removeAll(keepCapacity: true)
+            pAddress.removeAll(keepCapacity: true)
+            pCity.removeAll(keepCapacity: true)
+            pState.removeAll(keepCapacity: true)
+            phonenumber.removeAll(keepCapacity: true)
+            postedAt.removeAll(keepCapacity: true)
+            
+            
             
             if let objects = objects {
                 
                 for object in objects {
                     
+                    
                     foodname.append(object["foodname"]! as! String)
                     serves.append(object["serves"]! as! String)
                     expiry.append(object["expiry"]! as! NSDate)
                     imageFiles.append(object["image"] as! PFFile)
+                    alllatitude.append(object["pickuplatitude"] as! CLLocationDegrees)
+                    alllongitude.append(object["pickuplongitude"] as! CLLocationDegrees)
+                    foodstatus.append(object["status"] as! String)
+                    posteduser.append(object["contactname"] as! String)
+                    fdescription.append(object["fooddescription"] as! String)
+                    // foodType.append(<#T##newElement: String##String#>)
+                    pAddress.append(object["pickupaddress"] as! String)
+                    pCity.append(object["pickupcity"] as! String)
+                    pState.append(object["pickupstate"] as! String)
+                    phonenumber.append(object["contactphone"] as! String)
+                    postedAt.append(object.createdAt! as! NSDate)
+                    
                     
                     self.tableView.reloadData()
                     
