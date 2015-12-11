@@ -19,5 +19,7 @@ class FoodCell: UITableViewCell {
     @IBOutlet var expiryLabel: UILabel!
     
     @IBOutlet var statusLabel: UILabel!
+    
+    
 
 }

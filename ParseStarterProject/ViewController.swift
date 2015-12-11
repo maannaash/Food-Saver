@@ -10,7 +10,7 @@
 import UIKit
 import Parse
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate    {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var username: UITextField!
@@ -131,8 +131,26 @@ class ViewController: UIViewController {
     }
     
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        self.username.resignFirstResponder()
+        self.password.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.username.delegate = self
+        self.password.delegate = self
+        
         
         //scrollView.contentSize.height = 600
         // Do any additional setup after loading the view, typically from a nib.

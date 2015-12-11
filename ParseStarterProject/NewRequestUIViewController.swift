@@ -16,6 +16,8 @@ var userCity:String = ""
 var userState:String = ""
 var userCountry:String = ""
 var userpostalCode:String = ""
+var theUserName:String = ""
+var theUserPhone:String = ""
 var userLatitude:CLLocationDegrees = CLLocationDegrees()
 var userLongitude:CLLocationDegrees = CLLocationDegrees()
 
@@ -136,16 +138,22 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.contactName.delegate = self
+        self.contactPhone.delegate = self
+        self.ExtraFoodName.delegate = self
+        self.foodDescription.delegate = self
+        self.servesHowMany.delegate = self
         
+        self.contactName.text = PFUser.currentUser()?.username
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        
         self.pickUpAddress.text = userAddress
         self.pickUpCity.text  = userCity
         self.pickUpState.text = userState
+        
         
         
     }
@@ -218,6 +226,7 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     
     override func viewDidAppear(animated: Bool) {
         
+        self.contactName.text = PFUser.currentUser()?.username
         self.pickUpAddress.text  = userAddress
         self.pickUpCity.text = userCity
         self.pickUpState.text  = userState
@@ -228,6 +237,23 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        self.contactName.resignFirstResponder()
+        self.contactPhone.resignFirstResponder()
+        self.ExtraFoodName.resignFirstResponder()
+        self.foodDescription.resignFirstResponder()
+        self.servesHowMany.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.view.endEditing(true)
     }
     
     
