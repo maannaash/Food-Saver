@@ -150,6 +150,9 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        self.pickUpAddress.userInteractionEnabled = false
+        self.pickUpCity.userInteractionEnabled = false
+        self.pickUpState.userInteractionEnabled = false
         self.pickUpAddress.text = userAddress
         self.pickUpCity.text  = userCity
         self.pickUpState.text = userState

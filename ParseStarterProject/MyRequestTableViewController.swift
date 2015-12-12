@@ -207,7 +207,6 @@ class MyRequestTableViewController: UITableViewController {
                     
                     self.tableView.reloadData()
                     
-                    
                 }
             }
             
@@ -224,6 +223,47 @@ class MyRequestTableViewController: UITableViewController {
 
     
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            
+            var query = PFQuery(className: "Request")
+            
+            query.getObjectInBackgroundWithId(mypostObjectIds[indexPath.row], block: { (object, error ) -> Void in
+                
+                if error != nil{
+                    print (error)
+                }else
+                {
+                    if let object = object {
+                        
+                     object.deleteInBackgroundWithBlock({ (success, error ) -> Void in
+                        if success == true {
+                            self.tableView.reloadData()
+                            
+                        }else{
+                            print(error)
+                        }
+                        
+                     })
+                        
+                    }
+                    
+                    
+                }
+                
+            })
+            
+            
+            
+            
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

@@ -138,12 +138,42 @@ class FoodRequestTableViewController: UITableViewController {
         print(indexPath.row)
         print(foodstatus[indexPath.row])
         foodcell.foodName.text = foodname[indexPath.row]
-        foodcell.servesLabel.text = serves[indexPath.row]
+        foodcell.servesLabel.text = "Serves " + String(serves[indexPath.row])
         foodcell.statusLabel.text = foodstatus[indexPath.row]
+        foodcell.descriptionLabel.text = fdescription[indexPath.row]
+        foodcell.postedByUser.text = "Posted by : " + String(posteduser[indexPath.row])
+    
         
         
+        // Posted Time
+        let pcalendar = NSCalendar.currentCalendar()
+        let pcomponents = pcalendar.components([.Day, .Hour, .Minute, .Second], fromDate: postedAt[indexPath.row], toDate: NSDate(), options: [])
+
+
         
+        var pdaytext = ""
+        var phourtext = ""
         
+        if pcomponents.day == 1{
+            pdaytext = " day ago "
+        }else {
+            pdaytext = " days ago "
+        }
+        
+        if pcomponents.hour == 1 {
+            phourtext = " hour ago "
+        }else{
+            phourtext = " hours ago "
+        }
+        
+        if pcomponents.day > 0 {
+            foodcell.postedWhen.text = String(pcomponents.day) + pdaytext
+        } else {
+            foodcell.postedWhen.text = String(pcomponents.hour) + phourtext
+        }
+
+        
+        // Remaining Time
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: NSDate(), toDate: expiry[indexPath.row], options: [])
         
@@ -161,9 +191,6 @@ class FoodRequestTableViewController: UITableViewController {
         }else{
             hourtext = " Hours & "
         }
-        
-        
-        
         
         if components.day > 0 {
             foodcell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"

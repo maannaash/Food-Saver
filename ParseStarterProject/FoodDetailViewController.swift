@@ -39,6 +39,14 @@ class FoodDetailViewController: UIViewController, MFMessageComposeViewController
     
     @IBOutlet var statusLabel: UILabel!
     
+    
+    @IBAction func directionsButtonPressed(sender: AnyObject) {
+        
+        
+    }
+    
+    
+    
     @IBAction func callButtonPressed(sender: AnyObject) {
         
         var unfmtphone = String(postedPhone.text!)
@@ -54,8 +62,6 @@ class FoodDetailViewController: UIViewController, MFMessageComposeViewController
         if let url = NSURL(string: "telprompt://\(newPhone)"){
             UIApplication.sharedApplication().openURL(url)
         }
-    
-    
 }
 
 

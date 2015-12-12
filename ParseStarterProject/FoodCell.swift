@@ -20,6 +20,14 @@ class FoodCell: UITableViewCell {
     
     @IBOutlet var statusLabel: UILabel!
     
+    @IBOutlet var descriptionLabel: UILabel!
     
+    @IBOutlet var postedByUser: UILabel!
+    
+    @IBOutlet var distanceAway: UILabel!
+    
+    @IBOutlet var statusImage: UIImageView!
+    
+    @IBOutlet var postedWhen: UILabel!
 
 }
