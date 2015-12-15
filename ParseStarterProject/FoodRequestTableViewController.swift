@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import CoreLocation
 
 var alllatitude = [CLLocationDegrees]()
 var alllongitude = [CLLocationDegrees]()
@@ -29,8 +30,11 @@ var postedAt = [NSDate]()
 var currentIndex = 0
 
 
-class FoodRequestTableViewController: UITableViewController {
+class FoodRequestTableViewController: UITableViewController , CLLocationManagerDelegate {
 
+    
+    var locationManager = CLLocationManager()
+    
     
     @IBAction func mapButtonPressed(sender: AnyObject) {
         performSegueWithIdentifier("mapSegue", sender: self)
@@ -39,7 +43,28 @@ class FoodRequestTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSFontAttributeName : UIFont(name: "Futura", size: 20)!
+        ]
+        let width = UIScreen.mainScreen().bounds.size.width
+        let height = UIScreen.mainScreen().bounds.size.height
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, width, height))
+        imgView.image = UIImage(named: "fbg1.png")!
+        imgView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(imgView)
+        self.view.sendSubviewToBack(imgView)
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
 
+        
+        
         var currentIndex = 0
         
         var foodRequestSummaryQuery = PFQuery(className: "Request")
@@ -126,6 +151,27 @@ class FoodRequestTableViewController: UITableViewController {
 
         // Configure the cell...
         
+        //Distance
+        
+        
+        let latitude:CLLocationDegrees = userLatitude
+        let longitude:CLLocationDegrees = userLongitude
+        let crntuserloc:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        let flatitude:CLLocationDegrees = alllatitude[indexPath.row]
+        let flongitude:CLLocationDegrees = alllongitude[indexPath.row]
+        let feeduserloc:CLLocationCoordinate2D = CLLocationCoordinate2DMake(flatitude, flongitude)
+        
+        var crntloc: CLLocation = CLLocation.init(latitude: latitude, longitude: longitude)
+        var fusrloc: CLLocation = CLLocation.init(latitude: flatitude, longitude: flongitude)
+        
+        var distance: CLLocationDistance = fusrloc.distanceFromLocation(crntloc)
+        
+        
+        var distinMiles = distance *  0.000621371192
+        foodcell.distanceAway.text = String(format: "%.2f", distinMiles) + " miles "
+        
+        //
         
         imageFiles[indexPath.row].getDataInBackgroundWithBlock { (data , error ) -> Void in
             
@@ -135,15 +181,41 @@ class FoodRequestTableViewController: UITableViewController {
             }
         }
         
+        
+        var tempimageView = UIImageView(frame: CGRectMake(10, 10, foodcell.frame.width - 10, foodcell.frame.height - 10))
+        
+        
+        
+        
+        if foodstatus[indexPath.row] == "Available" {
+            
+            tempimageView = UIImageView(image: UIImage(named: "lgc.png"))
+            foodcell.backgroundView = tempimageView
+            foodcell.statusImage.image = UIImage(named: "bgc.png")
+            
+        }else {
+            if foodstatus[indexPath.row] == "Blocked"{
+                
+                tempimageView = UIImageView(image: UIImage(named: "loc.png"))
+                foodcell.backgroundView = tempimageView
+                foodcell.statusImage.image = UIImage(named: "doc.png")
+
+                
+            }
+        }
+
+        
+        
         print(indexPath.row)
         print(foodstatus[indexPath.row])
         foodcell.foodName.text = foodname[indexPath.row]
         foodcell.servesLabel.text = "Serves " + String(serves[indexPath.row])
         foodcell.statusLabel.text = foodstatus[indexPath.row]
         foodcell.descriptionLabel.text = fdescription[indexPath.row]
-        foodcell.postedByUser.text = "Posted by : " + String(posteduser[indexPath.row])
-    
+        var postedusertext = "Posted by : " + String(posteduser[indexPath.row])
         
+        
+      
         
         // Posted Time
         let pcalendar = NSCalendar.currentCalendar()
@@ -151,52 +223,28 @@ class FoodRequestTableViewController: UITableViewController {
 
 
         
-        var pdaytext = ""
-        var phourtext = ""
-        
-        if pcomponents.day == 1{
-            pdaytext = " day ago "
-        }else {
-            pdaytext = " days ago "
-        }
-        
-        if pcomponents.hour == 1 {
-            phourtext = " hour ago "
-        }else{
-            phourtext = " hours ago "
-        }
+        var pdaytext = " d ago "
+        var phourtext = " hr ago "
         
         if pcomponents.day > 0 {
-            foodcell.postedWhen.text = String(pcomponents.day) + pdaytext
+            foodcell.postedByUser.text = postedusertext + " " + String(pcomponents.day) + pdaytext
         } else {
-            foodcell.postedWhen.text = String(pcomponents.hour) + phourtext
-        }
+            foodcell.postedByUser.text = postedusertext + " " + String(pcomponents.hour) + phourtext        }
 
         
         // Remaining Time
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: NSDate(), toDate: expiry[indexPath.row], options: [])
         
-        var daytext = ""
-        var hourtext = ""
-        
-        if components.day == 1{
-            daytext = " Day & "
-        }else {
-            daytext = " Days & "
-        }
-        
-        if components.hour == 1 {
-            hourtext = " Hour & "
-        }else{
-            hourtext = " Hours & "
-        }
+        var daytext = " d "
+        var hourtext = " hr & "
+
         
         if components.day > 0 {
-            foodcell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
+            foodcell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " hr rem"
         } else {
             foodcell.expiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
-            " Mins remaining"
+            " min rem"
         }
         
         return foodcell
@@ -266,6 +314,73 @@ class FoodRequestTableViewController: UITableViewController {
         performSegueWithIdentifier("foodDetailSegue", sender: self)
         currentIndex = indexPath.row
     }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        
+        var currentLocation:CLLocation = locations[0]
+        var latitude = currentLocation.coordinate.latitude
+        var longitude = currentLocation.coordinate.longitude
+        userLatitude = currentLocation.coordinate.latitude
+        userLongitude = currentLocation.coordinate.longitude
+        
+        CLGeocoder().reverseGeocodeLocation(currentLocation) { (placemarks, error ) -> Void in
+            
+            if error != nil {
+                
+                print("Error" + (error?.localizedDescription)!)
+                return
+                
+            }
+            
+            var subthoroughfare = ""
+            var thoroughfare = ""
+            if placemarks?.count > 0 {
+                
+                if let p = placemarks?.first {
+                    
+                    
+                    self.locationManager.stopUpdatingLocation()
+                    
+                    
+                    if p.subThoroughfare != nil {
+                        
+                        subthoroughfare = p.subThoroughfare!
+                        
+                    }
+                    
+                    if p.thoroughfare != nil {
+                        
+                        thoroughfare = p.thoroughfare!
+                        
+                    }
+                    userAddress = "\(subthoroughfare) \(thoroughfare)"
+                    userCity = p.locality!
+                    userState = p.administrativeArea!
+                    userCountry = p.country!
+                    userpostalCode = p.postalCode!
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        print("Error" + error.localizedDescription)
+        
+    }
+    
+
+    
     
 
     /*

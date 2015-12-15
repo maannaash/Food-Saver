@@ -16,7 +16,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSFontAttributeName : UIFont(name: "Futura", size: 20)!
+        ]
        
         let latitude:CLLocationDegrees = userLatitude
         let longitude:CLLocationDegrees = userLongitude

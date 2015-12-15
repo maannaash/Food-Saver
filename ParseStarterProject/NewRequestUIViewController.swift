@@ -138,6 +138,11 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSFontAttributeName : UIFont(name: "Futura", size: 20)!
+        ]
         self.contactName.delegate = self
         self.contactPhone.delegate = self
         self.ExtraFoodName.delegate = self
@@ -229,10 +234,25 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     
     override func viewDidAppear(animated: Bool) {
         
+        self.contactName.delegate = self
+        self.contactPhone.delegate = self
+        self.ExtraFoodName.delegate = self
+        self.foodDescription.delegate = self
+        self.servesHowMany.delegate = self
+        
         self.contactName.text = PFUser.currentUser()?.username
-        self.pickUpAddress.text  = userAddress
-        self.pickUpCity.text = userCity
-        self.pickUpState.text  = userState
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        self.pickUpAddress.userInteractionEnabled = false
+        self.pickUpCity.userInteractionEnabled = false
+        self.pickUpState.userInteractionEnabled = false
+        self.pickUpAddress.text = userAddress
+        self.pickUpCity.text  = userCity
+        self.pickUpState.text = userState
+
         
     }
     

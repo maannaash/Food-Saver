@@ -15,7 +15,11 @@ class TabBarViewController: UITabBarController {
 
         // Do any additional setup after loading the view.
         
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "blank Green.png"), forBarMetrics: UIBarMetrics.Default)
+        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "blk.png"), forBarMetrics: UIBarMetrics.Default)
+        
+        
+        UITabBar.appearance().barTintColor = UIColor.blackColor()
+        UITabBar.appearance().tintColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
         
     }
 

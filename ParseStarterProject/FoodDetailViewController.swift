@@ -39,15 +39,19 @@ class FoodDetailViewController: UIViewController, MFMessageComposeViewController
     
     @IBOutlet var statusLabel: UILabel!
     
+    @IBOutlet var postedFoodTitle2: UILabel!
     
     @IBAction func directionsButtonPressed(sender: AnyObject) {
         
+        performSegueWithIdentifier("directionMapSegue", sender: self)
         
     }
     
     
     
     @IBAction func callButtonPressed(sender: AnyObject) {
+        
+        print("Call pressed")
         
         var unfmtphone = String(postedPhone.text!)
         var newPhone = ""
@@ -66,6 +70,8 @@ class FoodDetailViewController: UIViewController, MFMessageComposeViewController
 
 
 @IBAction func sendMessageButtonPressed(sender: AnyObject) {
+    
+    print("Msg Pressed")
     
     let messageVC = MFMessageComposeViewController()
     
@@ -114,13 +120,56 @@ func messageComposeViewController(controller: MFMessageComposeViewController, di
 override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationController?.navigationBar.titleTextAttributes = [
+        NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+        NSFontAttributeName : UIFont(name: "Futura", size: 20)!
+    ]
+    
+    let width = UIScreen.mainScreen().bounds.size.width
+    let height = UIScreen.mainScreen().bounds.size.height
+    
+    let imgView = UIImageView(frame: CGRectMake(0, 0, width, height))
+    imgView.image = UIImage(named: "fbg1.png")!
+     imgView.contentMode = UIViewContentMode.ScaleAspectFill
+     self.view.addSubview(imgView)
+    self.view.sendSubviewToBack(imgView)
+
+    //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg2.png")!)
+    
     // Do any additional setup after loading the view.
     
     print(currentIndex)
     print(postedAt)
     
-    postedByUserName.text = posteduser[currentIndex]
-    postedOnDate.text = String(postedAt[currentIndex])
+    
+    let formatter = NSDateFormatter()
+    formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    
+    let dateString = formatter.stringFromDate(postedAt[currentIndex])
+    
+    
+    // Posted Time
+    let pcalendar = NSCalendar.currentCalendar()
+    let pcomponents = pcalendar.components([.Day, .Hour, .Minute, .Second], fromDate: postedAt[currentIndex], toDate: NSDate(), options: [])
+    
+    
+    
+    var pdaytext = " d ago "
+    var phourtext = " hr ago "
+    var agotext = ""
+    
+    if pcomponents.day > 0 {
+        agotext = String(pcomponents.day) + pdaytext
+    } else {
+        agotext = String(pcomponents.hour) + phourtext        }
+    
+
+    
+    
+    
+    postedByUserName.text = "Posted by : " + String(posteduser[currentIndex]) + " " + agotext
+    //postedOnDate.text = dateString
     postedFoodTitle.text = foodname[currentIndex]
     postedFoodDescription.text = fdescription[currentIndex]
     postedServesCount.text = serves[currentIndex]
@@ -130,6 +179,7 @@ override func viewDidLoad() {
     postedCity.text = pCity[currentIndex]
     postedState.text = pState[currentIndex]
     statusLabel.text = foodstatus[currentIndex]
+    postedFoodTitle2.text = foodname[currentIndex]
     
     imageFiles[currentIndex].getDataInBackgroundWithBlock { (data , error ) -> Void in
         
@@ -145,28 +195,16 @@ override func viewDidLoad() {
     let components = calendar.components([.Day, .Hour, .Minute, .Second], fromDate: NSDate(), toDate: expiry[currentIndex], options: [])
     
     
-    var daytext = ""
-    var hourtext = ""
-    
-    if components.day == 1{
-        daytext = " Day & "
-    }else {
-        daytext = " Days & "
-    }
-    
-    if components.hour == 1 {
-        hourtext = " Hour & "
-    }else{
-        hourtext = " Hours & "
-    }
+    var daytext = " d "
+    var hourtext = " hr & "
     
     
     
     if components.day > 0 {
-        postedExpiry.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
+        postedExpiry.text = String(components.day) + daytext + String(components.hour) + " hr rem"
     } else {
         postedExpiry.text = String(components.hour) + hourtext + String(components.minute) +
-        " Mins remaining"
+        " min rem"
         
     }
     

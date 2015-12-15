@@ -36,7 +36,18 @@ class MyRequestTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSFontAttributeName : UIFont(name: "Futura", size: 20)!
+        ]
+        let width = UIScreen.mainScreen().bounds.size.width
+        let height = UIScreen.mainScreen().bounds.size.height
         
+        let imgView = UIImageView(frame: CGRectMake(0, 0, width, height))
+        imgView.image = UIImage(named: "fbg1.png")!
+        imgView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(imgView)
+        self.view.sendSubviewToBack(imgView)
         
         var myRequestSummaryQuery = PFQuery(className: "Request")
         myRequestSummaryQuery.whereKey("userid", equalTo: PFUser.currentUser()!.objectId!)
@@ -127,6 +138,33 @@ class MyRequestTableViewController: UITableViewController {
                 mycell.postedImage.image = downloadedImage
             }
         }
+        
+        var tpimageView = UIImageView(frame: CGRectMake(10, 10, mycell.frame.width - 10, mycell.frame.height - 10))
+        
+
+        
+        if mystatus[indexPath.row] == "Available" {
+            
+            tpimageView = UIImageView(image: UIImage(named: "lgc.png"))
+            mycell.backgroundView = tpimageView
+            mycell.myStatusImage.image = UIImage(named: "bgc.png")
+            
+        }else {
+            if mystatus[indexPath.row] == "Blocked"{
+                
+                tpimageView = UIImageView(image: UIImage(named: "loc.png"))
+                mycell.backgroundView = tpimageView
+                mycell.myStatusImage.image = UIImage(named: "doc.png")
+                
+                
+            }else {
+                tpimageView = UIImageView(image: UIImage(named: "lrc.png"))
+                mycell.backgroundView = tpimageView
+                mycell.myStatusImage.image = UIImage(named: "brc.png")
+            }
+        }
+        
+
         
         
         mycell.foodName.text = myfoodname[indexPath.row]

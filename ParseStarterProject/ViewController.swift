@@ -16,7 +16,11 @@ class ViewController: UIViewController, UITextFieldDelegate    {
     @IBOutlet var username: UITextField!
     @IBOutlet var password: UITextField!
     @IBOutlet var loginButton: UIButton!
+    
+
     @IBOutlet var signUpButton: UIButton!
+    
+    
     var signupActive = true
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -73,7 +77,7 @@ class ViewController: UIViewController, UITextFieldDelegate    {
                     if error == nil {
                         
                         // successful sign up
-                        self.performSegueWithIdentifier("tabBarSegue", sender: self)
+                       self.performSegueWithIdentifier("tabBarSegue", sender: self)
                         
                     }else{
                         
@@ -148,6 +152,20 @@ class ViewController: UIViewController, UITextFieldDelegate    {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+    
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y -= 150
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y += 150
+    }
+        
+        self.username.borderStyle = UITextBorderStyle.RoundedRect
+        
         self.username.delegate = self
         self.password.delegate = self
         
@@ -156,6 +174,23 @@ class ViewController: UIViewController, UITextFieldDelegate    {
         // Do any additional setup after loading the view, typically from a nib.
         
         
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        animateViewMoving(true, moveValue: 200)
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        animateViewMoving(false, moveValue: 200)
+    }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        var movementDuration:NSTimeInterval = 0.3
+        var movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
     }
     
     override func didReceiveMemoryWarning() {

@@ -142,6 +142,31 @@ class MyFoodDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSFontAttributeName : UIFont(name: "Futura", size: 20)!
+        ]
+        let width = UIScreen.mainScreen().bounds.size.width
+        let height = UIScreen.mainScreen().bounds.size.height
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, width, height))
+        imgView.image = UIImage(named: "fbg1.png")!
+        imgView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(imgView)
+        self.view.sendSubviewToBack(imgView)
+        
+        /*
+        let mwidth = UIScreen.mainScreen().bounds.size.width
+        let mheight = UIScreen.mainScreen().bounds.size.height
+        
+        var mimgView = UIImageView(frame: CGRectMake(0, 0, mwidth, mheight))
+        mimgView.image = UIImage(named: "bg22.png")!
+        mimgView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(mimgView)
+        self.view.sendSubviewToBack(mimgView)*/
+
+        
+        
         // Do any additional setup after loading the view.
         
         if mystatus[mycurrentIndex] == "Available" {

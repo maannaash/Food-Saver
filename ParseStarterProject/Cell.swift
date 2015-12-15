@@ -20,4 +20,5 @@ class Cell: UITableViewCell {
     
     @IBOutlet var statusLabel: UILabel!
     
+    @IBOutlet var myStatusImage: UIImageView!
 }
