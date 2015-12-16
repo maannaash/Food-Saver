@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate    {
     @IBOutlet var password: UITextField!
     @IBOutlet var loginButton: UIButton!
     
-
+    
     @IBOutlet var signUpButton: UIButton!
     
     
@@ -39,7 +39,6 @@ class ViewController: UIViewController, UITextFieldDelegate    {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    //////////////Sign Up Button Pressed func
     
     @IBAction func SignUpButtonPressed(sender: UIButton) {
         
@@ -47,9 +46,8 @@ class ViewController: UIViewController, UITextFieldDelegate    {
             
             displayAlert("Error in Form", Message: "Please enter a username and password")
             
-        }else{
-            
-            
+        }else
+        {
             activityIndicator = UIActivityIndicatorView(frame:CGRectMake(0, 0, 50, 50))
             activityIndicator.center = self.view.center
             activityIndicator.hidesWhenStopped = true
@@ -59,54 +57,50 @@ class ViewController: UIViewController, UITextFieldDelegate    {
             UIApplication.sharedApplication().beginIgnoringInteractionEvents()
             
             var errorMessage = "Please try again !"
+            var user = PFUser()
             
-            if signupActive == true {
+            user.username = username.text
+            user.password = password.text
+            
+            user.signUpInBackgroundWithBlock({ (success, error ) -> Void in
+                
+                self.activityIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 
                 
-                var user = PFUser()
-                
-                user.username = username.text
-                user.password = password.text
-                
-                user.signUpInBackgroundWithBlock({ (success, error ) -> Void in
+                if error == nil {
                     
-                    self.activityIndicator.stopAnimating()
-                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    // successful sign up
+                    self.performSegueWithIdentifier("tabBarSegue", sender: self)
                     
+                }else{
                     
-                    if error == nil {
+                    if let errorString = error?.userInfo["error"] as? String {
+                        errorMessage = errorString
                         
-                        // successful sign up
-                       self.performSegueWithIdentifier("tabBarSegue", sender: self)
-                        
-                    }else{
-                        
-                        if let errorString = error?.userInfo["error"] as? String {
-                            errorMessage = errorString
-                            
-                        }
-                        self.displayAlert("Failed Sign Up", Message: errorMessage)
                     }
-                })
-            }else {
-                //login code
-                PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error ) -> Void in
-                    
-                    self.activityIndicator.stopAnimating()
-                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
-                    
-                    if user != nil{
-                        
-                        self.performSegueWithIdentifier("tabBarSegue", sender: self)
-                    }else{
-                        
-                        if let errorString = error?.userInfo["error"] as? String {
-                            errorMessage = errorString
-                        }
-                        self.displayAlert("Failed Login", Message: errorMessage)
-                    }
-                })
+                    self.displayAlert("Failed Sign Up", Message: errorMessage)
+                }
+            })
+            
+            /*   //login code
+            PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error ) -> Void in
+            
+            self.activityIndicator.stopAnimating()
+            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            
+            if user != nil{
+            
+            self.performSegueWithIdentifier("tabBarSegue", sender: self)
+            }else{
+            
+            if let errorString = error?.userInfo["error"] as? String {
+            errorMessage = errorString
             }
+            self.displayAlert("Failed Login", Message: errorMessage)
+            }
+            })*/
+            
             
         }
         
@@ -120,18 +114,54 @@ class ViewController: UIViewController, UITextFieldDelegate    {
     @IBAction func LoginButton(sender: AnyObject) {
         
         
-        if signupActive == true {
+        if username.text == "" || password.text == "" {
             
-            signUpButton.setTitle("Login", forState: UIControlState.Normal)
-            loginButton.setTitle("New User ? Sign Up", forState: UIControlState.Normal)
-            signupActive = false
+            displayAlert("Error in Form", Message: "Please enter a username and password")
             
         }else{
-            signUpButton.setTitle("Sign Up", forState: UIControlState.Normal)
-            loginButton.setTitle("Already Registered ? Login", forState: UIControlState.Normal)
-            signupActive = true
+            
+            activityIndicator = UIActivityIndicatorView(frame:CGRectMake(0, 0, 50, 50))
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            
+            var errorMessage = "Please try again !"
+            
+            PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error ) -> Void in
+                
+                self.activityIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                if user != nil{
+                    
+                    self.performSegueWithIdentifier("tabBarSegue", sender: self)
+                }else{
+                    
+                    if let errorString = error?.userInfo["error"] as? String {
+                        errorMessage = errorString
+                    }
+                    self.displayAlert("Failed Login", Message: errorMessage)
+                }
+            })
             
         }
+        
+        
+        /* if signupActive == true {
+        
+        signUpButton.setTitle("Login", forState: UIControlState.Normal)
+        loginButton.setTitle("New User ? Sign Up", forState: UIControlState.Normal)
+        signupActive = false
+        
+        }else{
+        signUpButton.setTitle("Sign Up", forState: UIControlState.Normal)
+        loginButton.setTitle("Already Registered ? Login", forState: UIControlState.Normal)
+        signupActive = true
+        
+        }*/
     }
     
     
@@ -147,22 +177,22 @@ class ViewController: UIViewController, UITextFieldDelegate    {
         
         self.view.endEditing(true)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         
-    
-    
-    func keyboardWillShow(sender: NSNotification) {
-        self.view.frame.origin.y -= 150
-    }
-    
-    func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y += 150
-    }
+        
+        
+        func keyboardWillShow(sender: NSNotification) {
+            self.view.frame.origin.y -= 150
+        }
+        
+        func keyboardWillHide(sender: NSNotification) {
+            self.view.frame.origin.y += 150
+        }
         
         self.username.borderStyle = UITextBorderStyle.RoundedRect
         

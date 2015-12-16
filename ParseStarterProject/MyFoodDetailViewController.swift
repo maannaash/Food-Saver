@@ -11,15 +11,13 @@ import Parse
 
 class MyFoodDetailViewController: UIViewController {
 
-    @IBOutlet var myPostedOnDate: UILabel!
     
     @IBOutlet var myFoodTitleText: UITextField!
     
     @IBOutlet var myFoodDescriptionText: UITextView!
     
     @IBOutlet var myServesText: UITextField!
-    
-    @IBOutlet var myFoodTypeText: UITextField!
+
     
     @IBOutlet var myExpiryLabel: UILabel!
     
@@ -38,6 +36,11 @@ class MyFoodDetailViewController: UIViewController {
     @IBOutlet var blockedButton: UIButton!
     
     @IBOutlet var takenButton: UIButton!
+    
+    var editActive = true
+    
+    @IBOutlet var editbuttonLabel: UIButton!
+    
     
     @IBAction func availableButtonPressed(sender: AnyObject) {
      
@@ -104,48 +107,55 @@ class MyFoodDetailViewController: UIViewController {
     
     @IBAction func editButtonPressed(sender: AnyObject) {
         
-        myFoodTitleText.userInteractionEnabled = true
-        myFoodDescriptionText.userInteractionEnabled = true
-        myServesText.userInteractionEnabled = true
-        myFoodTypeText.userInteractionEnabled = true
-        myPhoneText.userInteractionEnabled = true
         
-    }
-    
-    @IBAction func saveButtonPressed(sender: AnyObject) {
         
-        var query = PFQuery(className: "Request")
-        query.getObjectInBackgroundWithId(String(mypostObjectIds[mycurrentIndex])) { (object, error ) -> Void in
+        if editActive == true {
+            myFoodTitleText.userInteractionEnabled = true
+            myFoodDescriptionText.userInteractionEnabled = true
+            myServesText.userInteractionEnabled = true
+            //myFoodTypeText.userInteractionEnabled = true
+            myPhoneText.userInteractionEnabled = true
+            editActive = false
+            editbuttonLabel.setTitle("Save", forState: .Normal)
             
-            if error != nil {
-                print(error)
-            }else{
-                object!["foodname"] = self.myFoodTitleText.text
-                object!["fooddescription"] = self.myFoodDescriptionText.text
-                object!["serves"] = self.myServesText.text
-                object!["contactphone"] = self.myPhoneText.text
-    
-                object?.saveInBackground()
-                self.myFoodTitleText.userInteractionEnabled = false
-                self.myFoodDescriptionText.userInteractionEnabled = false
-                self.myServesText.userInteractionEnabled = false
-                self.myFoodTypeText.userInteractionEnabled = false
-                self.myPhoneText.userInteractionEnabled = false
-
+        }else {
+            var query = PFQuery(className: "Request")
+            query.getObjectInBackgroundWithId(String(mypostObjectIds[mycurrentIndex])) { (object, error ) -> Void in
                 
+                if error != nil {
+                    print(error)
+                }else{
+                    object!["foodname"] = self.myFoodTitleText.text
+                    object!["fooddescription"] = self.myFoodDescriptionText.text
+                    object!["serves"] = self.myServesText.text
+                    object!["contactphone"] = self.myPhoneText.text
+                    
+                    object?.saveInBackground()
+                    self.myFoodTitleText.userInteractionEnabled = false
+                    self.myFoodDescriptionText.userInteractionEnabled = false
+                    self.myServesText.userInteractionEnabled = false
+                    //  self.myFoodTypeText.userInteractionEnabled = false
+                    self.myPhoneText.userInteractionEnabled = false
+                    
+                    
+                }
             }
+            editActive = true
+            editbuttonLabel.setTitle("Edit", forState: .Normal)
         }
         
     }
+    
     
         
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
+        
         let width = UIScreen.mainScreen().bounds.size.width
         let height = UIScreen.mainScreen().bounds.size.height
         
@@ -193,11 +203,11 @@ class MyFoodDetailViewController: UIViewController {
         myFoodTitleText.userInteractionEnabled = false
         myFoodDescriptionText.userInteractionEnabled = false
         myServesText.userInteractionEnabled = false
-        myFoodTypeText.userInteractionEnabled = false
+      //  myFoodTypeText.userInteractionEnabled = false
         myPhoneText.userInteractionEnabled = false
         
         
-        myPostedOnDate.text = String(mypostedAt[mycurrentIndex])
+        //myPostedOnDate.text = String(mypostedAt[mycurrentIndex])
         myFoodTitleText.text = myfoodname[mycurrentIndex]
         myFoodDescriptionText.text = myfdescription[mycurrentIndex]
         myServesText.text = myserves[mycurrentIndex]

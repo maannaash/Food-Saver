@@ -19,7 +19,8 @@ class TabBarViewController: UITabBarController {
         
         
         UITabBar.appearance().barTintColor = UIColor.blackColor()
-        UITabBar.appearance().tintColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
+        UITabBar.appearance().tintColor = UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100)
+        
         
     }
 

@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
         let width = UIScreen.mainScreen().bounds.size.width

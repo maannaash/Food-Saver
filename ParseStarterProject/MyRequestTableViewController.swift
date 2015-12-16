@@ -37,7 +37,7 @@ class MyRequestTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
         let width = UIScreen.mainScreen().bounds.size.width
@@ -168,7 +168,7 @@ class MyRequestTableViewController: UITableViewController {
         
         
         mycell.foodName.text = myfoodname[indexPath.row]
-        mycell.servesLabel.text = myserves[indexPath.row]
+        mycell.servesLabel.text = "Serves " + myserves[indexPath.row]
         mycell.statusLabel.text = String(mystatus[indexPath.row])
         
         

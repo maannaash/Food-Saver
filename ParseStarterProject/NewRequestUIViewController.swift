@@ -124,12 +124,40 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
                 if error == nil {
                     
                     //success
+                    
+                    let channels = ["","pushes"]
                     print("Success")
+                    let push = PFPush()
+                    push.setChannels(channels)
+                    
+                    push.setMessage("New Feed in you area")
+                    push.sendPushInBackground()
+                    
+                    
+                  /*  var pushQuery = PFInstallation.query()
+                    pushQuery?.whereKey("deviceType", equalTo: "ios")
+                    
+                    
+                    
+                    PFPush.sendPushMessageToQueryInBackground(pushQuery!, withMessage: "New Feed posted near your location", block: { (success, error ) -> Void in
+                        
+                        if error != nil {
+                            print("error")
+                            print(error?.description)
+                        }else {
+                            print("success")
+                        }
+                        
+
+                    })
+                    //PFPush.sendPushMessageToQueryInBackground(pushQuery!, withMessage: "New Feed posted near your location")
+                    */
+                    
                 }else{
                     
                     print(error)
                     
-                }
+                }   
             }
             
             
@@ -140,7 +168,7 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
         
         
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
         self.contactName.delegate = self

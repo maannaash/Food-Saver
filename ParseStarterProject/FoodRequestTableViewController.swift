@@ -40,13 +40,16 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         performSegueWithIdentifier("mapSegue", sender: self)
     }
     
+    @IBOutlet var mapbuttonLabel: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        mapbuttonLabel.tintColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
+        
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName : UIColor(patternImage: UIImage(named: "fbg1.png")!),
+            NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
         let width = UIScreen.mainScreen().bounds.size.width
@@ -67,9 +70,18 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         
         var currentIndex = 0
         
+        let usrid = PFUser.currentUser()!.objectId!
+        
+        //let predicate = NSPredicate(format: "userid != 'usrid' AND status != 'Taken'")
+        
         var foodRequestSummaryQuery = PFQuery(className: "Request")
         
+        
         foodRequestSummaryQuery.whereKey("userid", notEqualTo: PFUser.currentUser()!.objectId!)
+        foodRequestSummaryQuery.whereKey("status", notEqualTo: "Taken")
+        foodRequestSummaryQuery.whereKey("pickupcity", equalTo: userCity)
+        
+        
         
         foodRequestSummaryQuery.findObjectsInBackgroundWithBlock { (objects, ErrorType) -> Void in
             
@@ -91,6 +103,7 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
             
             if let objects = objects {
                 
+                print (objects.count)
                 for object in objects {
                     
                     
@@ -169,7 +182,7 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         
         
         var distinMiles = distance *  0.000621371192
-        foodcell.distanceAway.text = String(format: "%.2f", distinMiles) + " miles "
+        foodcell.distanceAway.text = String(format: "%.2f", distinMiles) + " miles away "
         
         //
         
@@ -206,8 +219,8 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
 
         
         
-        print(indexPath.row)
-        print(foodstatus[indexPath.row])
+        //print(indexPath.row)
+        //print(foodstatus[indexPath.row])
         foodcell.foodName.text = foodname[indexPath.row]
         foodcell.servesLabel.text = "Serves " + String(serves[indexPath.row])
         foodcell.statusLabel.text = foodstatus[indexPath.row]
@@ -255,7 +268,8 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         var foodRequestSummaryQuery = PFQuery(className: "Request")
         
         foodRequestSummaryQuery.whereKey("userid", notEqualTo: PFUser.currentUser()!.objectId!)
-      //  foodRequestSummaryQuery.whereKey("pickupcity", equalTo: String("Bloomington"))
+        foodRequestSummaryQuery.whereKey("status", notEqualTo: "Taken")
+        foodRequestSummaryQuery.whereKey("pickupcity", equalTo: userCity)
         
         
         foodRequestSummaryQuery.findObjectsInBackgroundWithBlock { (objects, ErrorType) -> Void in
