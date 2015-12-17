@@ -107,7 +107,10 @@ class directionViewController: UIViewController, CLLocationManagerDelegate  {
                         
                        // self.directionText.text = self.directionText.text) + String(next.instructions)
                         
-                        directionSteps = directionSteps + " " + next.instructions + "\n"
+                        
+                        var eachline = "-> " + next.instructions
+                        
+                        directionSteps = directionSteps + " " + eachline + "\n"
 
                         //print(next.instructions)
                         //print(directionSteps)
