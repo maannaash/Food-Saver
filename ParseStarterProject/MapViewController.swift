@@ -20,6 +20,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100)
        
         let latitude:CLLocationDegrees = userLatitude
         let longitude:CLLocationDegrees = userLongitude

@@ -179,11 +179,10 @@ class ViewController: UIViewController, UITextFieldDelegate    {
     }
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
         
         
         func keyboardWillShow(sender: NSNotification) {

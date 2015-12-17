@@ -47,6 +47,8 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     
     @IBOutlet var foodImage: UIImageView!
     
+    @IBOutlet var deliverFoodSwitch: UISwitch!
+    
     var activityIndicator = UIActivityIndicatorView()
     
     var locationManager = CLLocationManager()
@@ -91,6 +93,8 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
             UIApplication.sharedApplication().beginIgnoringInteractionEvents()
             
             
+            
+            
             var request = PFObject(className: "Request")
             
             request["userid"] = PFUser.currentUser()?.objectId
@@ -106,6 +110,7 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
             request["pickuplatitude"] = userLatitude
             request["pickuplongitude"] = userLongitude
             request["status"] = "Available"
+          //  request["deliverFood"] = deliverFoodSwitch.
             
             
             
@@ -166,6 +171,9 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
+        
+        datePicker.backgroundColor = UIColor.clearColor()
         
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),

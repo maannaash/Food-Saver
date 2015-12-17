@@ -177,25 +177,16 @@ class MyRequestTableViewController: UITableViewController {
         
         var daytext = ""
         var hourtext = ""
+        daytext = " d & "
+        hourtext = " hr & "
         
-        if components.day == 1{
-            daytext = " Day & "
-        }else {
-            daytext = " Days & "
-        }
-        
-        if components.hour == 1 {
-            hourtext = " Hour & "
-        }else{
-            hourtext = " Hours & "
-        }
         
         
         if components.day > 0 {
-            mycell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
+            mycell.expiryLabel.text = "Expires in " + String(components.day) + daytext + String(components.hour) + " hr"
         } else {
-            mycell.expiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
-            " Mins remaining"
+            mycell.expiryLabel.text = "Expires in " + String(components.hour) + hourtext + String(components.minute) +
+            " min"
         }
 
         

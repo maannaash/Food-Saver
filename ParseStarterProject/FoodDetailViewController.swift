@@ -125,6 +125,9 @@ override func viewDidLoad() {
         NSFontAttributeName : UIFont(name: "Futura", size: 20)!
     ]
     
+    self.navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100)
+
+    
     let width = UIScreen.mainScreen().bounds.size.width
     let height = UIScreen.mainScreen().bounds.size.height
     
@@ -201,10 +204,9 @@ override func viewDidLoad() {
     
     
     if components.day > 0 {
-        postedExpiry.text = String(components.day) + daytext + String(components.hour) + " hr rem"
+        postedExpiry.text = "Expires in " + String(components.day) + daytext + String(components.hour) + " hr"
     } else {
-        postedExpiry.text = String(components.hour) + hourtext + String(components.minute) +
-        " min rem"
+        postedExpiry.text = "Expires in " + String(components.hour) + hourtext + String(components.minute) + " min"
         
     }
     
@@ -216,6 +218,9 @@ override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
 }
+
+    
+   
 
 
 /*

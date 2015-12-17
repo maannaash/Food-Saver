@@ -46,6 +46,9 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         super.viewDidLoad()
         
         
+        self.tableView.reloadData()
+        
+        
         mapbuttonLabel.tintColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
         
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -82,7 +85,7 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         foodRequestSummaryQuery.whereKey("pickupcity", equalTo: userCity)
         
         
-        
+        self.tableView.reloadData()
         foodRequestSummaryQuery.findObjectsInBackgroundWithBlock { (objects, ErrorType) -> Void in
             
             foodname.removeAll(keepCapacity: true)
@@ -254,10 +257,9 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
 
         
         if components.day > 0 {
-            foodcell.expiryLabel.text = String(components.day) + daytext + String(components.hour) + " hr rem"
+            foodcell.expiryLabel.text = "Expires in " + String(components.day) + daytext + String(components.hour) + " hr"
         } else {
-            foodcell.expiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
-            " min rem"
+            foodcell.expiryLabel.text = "Expires in " + String(components.hour) + hourtext + String(components.minute) + " min"
         }
         
         return foodcell
@@ -265,6 +267,10 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
     
     
     override func viewDidAppear(animated: Bool) {
+        
+        
+        
+        self.tableView.reloadData()
         var foodRequestSummaryQuery = PFQuery(className: "Request")
         
         foodRequestSummaryQuery.whereKey("userid", notEqualTo: PFUser.currentUser()!.objectId!)

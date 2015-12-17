@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class MyFoodDetailViewController: UIViewController {
+class MyFoodDetailViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet var myFoodTitleText: UITextField!
@@ -156,6 +156,8 @@ class MyFoodDetailViewController: UIViewController {
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
         ]
         
+        self.navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100)
+        
         let width = UIScreen.mainScreen().bounds.size.width
         let height = UIScreen.mainScreen().bounds.size.height
         
@@ -232,33 +234,38 @@ class MyFoodDetailViewController: UIViewController {
         
         var daytext = ""
         var hourtext = ""
-        
-        if components.day == 1{
-            daytext = " Day & "
-        }else {
-            daytext = " Days & "
-        }
-        
-        if components.hour == 1 {
-            hourtext = " Hour & "
-        }else{
-            hourtext = " Hours & "
-        }
-        
-        
-        
-        if components.day > 0 {
-            myExpiryLabel.text = String(components.day) + daytext + String(components.hour) + " Hours remaining"
-        } else {
-            myExpiryLabel.text = String(components.hour) + hourtext + String(components.minute) +
-            " Mins remaining"
-            
-        }
+        daytext = " d & "
+        hourtext = " hr & "
 
         
         
         
+        if components.day > 0 {
+            myExpiryLabel.text = "Expires in " + String(components.day) + daytext + String(components.hour) + " hr"
+        } else {
+            myExpiryLabel.text = "Expires in " + String(components.hour) + hourtext + String(components.minute) + " min"
+            
+        }
+        
     }
+    
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        self.myFoodTitleText.resignFirstResponder()
+        self.myFoodDescriptionText.resignFirstResponder()
+        self.myServesText.resignFirstResponder()
+        self.myPhoneText.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
