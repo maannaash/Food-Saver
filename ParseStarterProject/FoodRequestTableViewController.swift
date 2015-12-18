@@ -40,13 +40,30 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
         performSegueWithIdentifier("mapSegue", sender: self)
     }
     
+    
+    
+    @IBAction func logoutPressed(sender: AnyObject) {
+        
+        PFUser.logOut()
+        performSegueWithIdentifier("logoutSegue", sender: self)
+        self.hidesBottomBarWhenPushed = true
+    }
+    
+    
     @IBOutlet var mapbuttonLabel: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+       // print("view did load")
+       // var timer = NSTimer(timeInterval: 0.5, target: self, selector: "refresh", userInfo: nil, repeats: true)
+       // print("test1234")
         
         self.tableView.reloadData()
+       // self.view.reloadInputViews()
         
         
         mapbuttonLabel.tintColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
@@ -101,6 +118,8 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
             pState.removeAll(keepCapacity: true)
             phonenumber.removeAll(keepCapacity: true)
             postedAt.removeAll(keepCapacity: true)
+            alllatitude.removeAll(keepCapacity: true)
+            alllongitude.removeAll(keepCapacity: true)
             
             
             
@@ -131,10 +150,18 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
                     
                     
                 }
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    self.tableView.reloadData()
+                })
                 
             }
 
         }
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.reloadData()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -262,6 +289,9 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
             foodcell.expiryLabel.text = "Expires in " + String(components.hour) + hourtext + String(components.minute) + " min"
         }
         
+        
+        
+
         return foodcell
     }
     
@@ -269,8 +299,13 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
     override func viewDidAppear(animated: Bool) {
         
         
+       // print("view did Appear")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
+     //   var timer = NSTimer(timeInterval: 0.5, target: self, selector: "refreshtable", userInfo: nil, repeats: true)
         self.tableView.reloadData()
+          self.view.reloadInputViews()
         var foodRequestSummaryQuery = PFQuery(className: "Request")
         
         foodRequestSummaryQuery.whereKey("userid", notEqualTo: PFUser.currentUser()!.objectId!)
@@ -293,6 +328,8 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
             pState.removeAll(keepCapacity: true)
             phonenumber.removeAll(keepCapacity: true)
             postedAt.removeAll(keepCapacity: true)
+            alllatitude.removeAll(keepCapacity: true)
+            alllongitude.removeAll(keepCapacity: true)
             
             
             
@@ -325,6 +362,9 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
             }
             
         }
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.reloadData()
     }
     
     
@@ -400,6 +440,10 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
     }
     
 
+    func refresh(){
+        print("refresh table")
+        self.tableView.reloadData()
+    }
     
     
 

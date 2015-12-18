@@ -81,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-522.5" y="273.5"/>
+            <point key="canvasLocation" x="-487.5" y="-8.5"/>
         </scene>
         <!--New Request-->
         <scene sceneID="eqn-JV-uBu">
@@ -128,7 +128,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expiry Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8H-OO-eYO">
-                                <rect key="frame" x="7" y="470" width="128" height="21"/>
+                                <rect key="frame" x="7" y="510" width="95" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -148,8 +148,8 @@
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="13"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="BJC-H7-hTM">
-                                <rect key="frame" x="7" y="494" width="361" height="87"/>
+                            <datePicker contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="BJC-H7-hTM">
+                                <rect key="frame" x="97" y="481" width="267" height="80"/>
                                 <date key="date" timeIntervalSinceReferenceDate="471080751.43476999">
                                     <!--2015-12-06 07:45:51 +0000-->
                                 </date>
@@ -185,13 +185,6 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmN-IB-Og3">
-                                <rect key="frame" x="167" y="583" width="36" height="30"/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="sendButtonPressed:" destination="ena-hl-fVf" eventType="touchUpInside" id="lNT-wG-7Sf"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please enter details below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfI-0w-4Cx">
                                 <rect key="frame" x="7" y="77" width="357" height="21"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
@@ -206,6 +199,17 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSs-h9-z8i">
                                 <rect key="frame" x="188" y="430" width="51" height="31"/>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmN-IB-Og3">
+                                <rect key="frame" x="128" y="574" width="118" height="30"/>
+                                <color key="backgroundColor" red="0.85796147584915161" green="0.5067068338394165" blue="0.057347618043422699" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="16"/>
+                                <state key="normal" title="Post">
+                                    <color key="titleColor" red="0.70588235294117652" green="0.70980392156862748" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendButtonPressed:" destination="ena-hl-fVf" eventType="touchUpInside" id="lNT-wG-7Sf"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" title="New Request" id="jzt-nd-6sE"/>
@@ -226,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URG-Lw-rML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1954.5" y="-1319.5"/>
+            <point key="canvasLocation" x="1620.5" y="-1318.5"/>
         </scene>
         <!--Food Request-->
         <scene sceneID="G7h-u1-Q4e">
@@ -318,6 +322,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Food Request" id="vhx-LT-3DN">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="kjY-ES-pNP">
+                            <connections>
+                                <action selector="logoutPressed:" destination="ZKI-mp-ire" id="Cg7-qL-K1z"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Map" id="eTC-Ss-1NS">
                             <connections>
                                 <action selector="mapButtonPressed:" destination="ZKI-mp-ire" id="Zpa-eD-eN1"/>
@@ -329,11 +338,12 @@
                     <connections>
                         <outlet property="mapbuttonLabel" destination="eTC-Ss-1NS" id="7Yg-N4-UNs"/>
                         <segue destination="Q15-xc-PaC" kind="show" identifier="foodDetailSegue" id="HOO-jT-iuk"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="logoutSegue" id="FlL-vM-ANC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="je6-Ab-aIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1995.5" y="-210.5"/>
+            <point key="canvasLocation" x="1675.5" y="-210.5"/>
         </scene>
         <!--Food Detail View Controller-->
         <scene sceneID="mB5-oQ-bGq">

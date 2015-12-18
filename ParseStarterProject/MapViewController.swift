@@ -16,6 +16,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    
+        self.map.delegate = self
+        
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
             NSFontAttributeName : UIFont(name: "Futura", size: 20)!
@@ -33,33 +36,58 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         map.setRegion(region, animated: true)
         
-        var annotation = MKPointAnnotation()
+        var annotation = ColorPointAnnotation(pinColor: UIColor.blueColor())
         
         annotation.coordinate = userlocation
         annotation.title = "My Location"
-        
+    
+      
         map.addAnnotation(annotation)
         
-        
-       // var annview:MKAnnotationView = MKAnnotationView()
-       // annview.annotation = annotation
-       // annview.image = UIImage(named: "home.png")
-       // annview.canShowCallout = true
-       // annview.enabled = true
-        
         var allLocations = [CLLocationCoordinate2D]()
+        var fdtitle = [String]()
+        var fstatus = [String]()
+        
+        allLocations.removeAll(keepCapacity: true)
+        fdtitle.removeAll(keepCapacity: true)
         
         for var i = 0; i < alllatitude.count; i++ {
+            print(i)
+            print("locaions count - " + String(alllatitude.count))
+            print("foodname count - " + String(foodname.count))
             
             allLocations.append(CLLocationCoordinate2DMake(alllatitude[i], alllongitude[i]))
+            fdtitle.append(foodname[i])
+            fstatus.append(foodstatus[i])
+            
+            //fdtitle.setValue(foodname[i], forKey: String(alllatitude[i]))
             
         }
        
         if allLocations.count > 0{
             for xlocation in allLocations {
-             var annot = MKPointAnnotation()
+         //    var annot = ColorPointAnnotation(pinColor: UIColor.redColor())
+                var annot = MKPointAnnotation()
+                
+                
+                for var m = 0; m < allLocations.count; m++ {
+
+                if String(allLocations[m]) == String(xlocation){
+                    
+                    if fstatus[m] == "Available"{
+                        annot = ColorPointAnnotation(pinColor: UIColor.greenColor())
+                    }else{
+                        annot = ColorPointAnnotation(pinColor: UIColor.orangeColor())
+                    }
+                    annot.title = fdtitle[m]
+                    annot.subtitle = "Status: " + fstatus[m]
+                    }
+                }
                 annot.coordinate = xlocation
-                annot.title = "Extra Food"
+                
+               // annot.title = String(fdtitle.objectForKey(sloc))
+                
+                
                 map.addAnnotation(annot)
                 
             }
@@ -75,6 +103,39 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
+
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+            let colorPointAnnotation = annotation as! ColorPointAnnotation
+            pinView?.pinTintColor = colorPointAnnotation.pinColor
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    class ColorPointAnnotation: MKPointAnnotation {
+        var pinColor: UIColor
+        
+        init(pinColor: UIColor) {
+            self.pinColor = pinColor
+            super.init()
+        }
+    }
     
     
     

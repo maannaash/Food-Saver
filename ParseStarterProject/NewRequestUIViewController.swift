@@ -174,6 +174,7 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fbg1.png")!)
         
         datePicker.backgroundColor = UIColor.clearColor()
+        datePicker.transform = CGAffineTransformMakeScale(0.7, 0.7)
         
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName : UIColor(colorLiteralRed: 255, green: 247, blue: 233, alpha: 100),
