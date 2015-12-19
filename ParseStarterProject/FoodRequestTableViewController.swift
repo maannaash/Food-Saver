@@ -42,13 +42,6 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
     
     
     
-    @IBAction func logoutPressed(sender: AnyObject) {
-        
-        PFUser.logOut()
-        performSegueWithIdentifier("logoutSegue", sender: self)
-        self.hidesBottomBarWhenPushed = true
-    }
-    
     
     @IBOutlet var mapbuttonLabel: UIBarButtonItem!
     
@@ -125,7 +118,7 @@ class FoodRequestTableViewController: UITableViewController , CLLocationManagerD
             
             if let objects = objects {
                 
-                print (objects.count)
+                //print (objects.count)
                 for object in objects {
                     
                     

@@ -53,14 +53,9 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
     
     var locationManager = CLLocationManager()
     
+
     
-    @IBAction func logoutButtonPressed(sender: AnyObject) {
-        
-        // PFUser.logOutInBackground()
-        // performSegueWithIdentifier("loginSegue", sender: self)
-        
-        
-    }
+
     
     
     
@@ -131,11 +126,11 @@ class NewRequestUIViewController: UIViewController, UINavigationControllerDelega
                     //success
                     
                     let channels = ["","pushes"]
-                    print("Success")
+                   // print("Success")
                     let push = PFPush()
                     push.setChannels(channels)
                     
-                    push.setMessage("New Feed in you area")
+                    push.setMessage("New food shared in your area")
                     push.sendPushInBackground()
                     
                     

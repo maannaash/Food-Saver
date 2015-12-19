@@ -45,8 +45,10 @@ class MyFoodDetailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func availableButtonPressed(sender: AnyObject) {
      
         availableButton.backgroundColor = UIColor.greenColor()
-        blockedButton.backgroundColor = UIColor.clearColor()
-        takenButton.backgroundColor = UIColor.clearColor()
+        
+
+        blockedButton.backgroundColor = UIColor.lightGrayColor()
+        takenButton.backgroundColor = UIColor.lightGrayColor()
         
         var query = PFQuery(className: "Request")
         query.getObjectInBackgroundWithId(String(mypostObjectIds[mycurrentIndex])) { (object, error ) -> Void in
@@ -65,9 +67,9 @@ class MyFoodDetailViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func blockedButtonPressed(sender: AnyObject) {
         
-        availableButton.backgroundColor = UIColor.clearColor()
+        availableButton.backgroundColor = UIColor.lightGrayColor()
         blockedButton.backgroundColor = UIColor.brownColor()
-        takenButton.backgroundColor = UIColor.clearColor()
+        takenButton.backgroundColor = UIColor.lightGrayColor()
         
         var query = PFQuery(className: "Request")
         query.getObjectInBackgroundWithId(String(mypostObjectIds[mycurrentIndex])) { (object, error ) -> Void in
@@ -86,8 +88,8 @@ class MyFoodDetailViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func takenButtonPressed(sender: AnyObject) {
         
-        availableButton.backgroundColor = UIColor.clearColor()
-        blockedButton.backgroundColor = UIColor.clearColor()
+        availableButton.backgroundColor = UIColor.lightGrayColor()
+        blockedButton.backgroundColor = UIColor.lightGrayColor()
         takenButton.backgroundColor = UIColor.redColor()
         
         var query = PFQuery(className: "Request")
@@ -184,20 +186,20 @@ class MyFoodDetailViewController: UIViewController, UITextFieldDelegate {
         if mystatus[mycurrentIndex] == "Available" {
             
             availableButton.backgroundColor = UIColor.greenColor()
-            blockedButton.backgroundColor = UIColor.clearColor()
-            takenButton.backgroundColor = UIColor.clearColor()
+            blockedButton.backgroundColor = UIColor.lightGrayColor()
+            takenButton.backgroundColor = UIColor.lightGrayColor()
         }
         
         if mystatus[mycurrentIndex] == "Blocked" {
             
-            availableButton.backgroundColor = UIColor.clearColor()
+            availableButton.backgroundColor = UIColor.lightGrayColor()
             blockedButton.backgroundColor = UIColor.brownColor()
-            takenButton.backgroundColor = UIColor.clearColor()
+            takenButton.backgroundColor = UIColor.lightGrayColor()
         }
         if mystatus[mycurrentIndex] == "Taken" {
             
-            availableButton.backgroundColor = UIColor.clearColor()
-            blockedButton.backgroundColor = UIColor.clearColor()
+            availableButton.backgroundColor = UIColor.lightGrayColor()
+            blockedButton.backgroundColor = UIColor.lightGrayColor()
             takenButton.backgroundColor = UIColor.redColor()
         }
         

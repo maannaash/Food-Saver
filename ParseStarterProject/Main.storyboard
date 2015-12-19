@@ -83,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="-487.5" y="-8.5"/>
         </scene>
-        <!--New Request-->
+        <!--New Share-->
         <scene sceneID="eqn-JV-uBu">
             <objects>
                 <viewController id="ena-hl-fVf" customClass="NewRequestUIViewController" customModule="Food_Saver" customModuleProvider="target" sceneMemberID="viewController">
@@ -204,7 +204,7 @@
                                 <color key="backgroundColor" red="0.85796147584915161" green="0.5067068338394165" blue="0.057347618043422699" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="16"/>
                                 <state key="normal" title="Post">
-                                    <color key="titleColor" red="0.70588235294117652" green="0.70980392156862748" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.98812156915664673" green="0.99600130319595337" blue="0.99188023805618286" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sendButtonPressed:" destination="ena-hl-fVf" eventType="touchUpInside" id="lNT-wG-7Sf"/>
@@ -212,7 +212,7 @@
                             </button>
                         </subviews>
                     </view>
-                    <navigationItem key="navigationItem" title="New Request" id="jzt-nd-6sE"/>
+                    <navigationItem key="navigationItem" title="New Share" id="jzt-nd-6sE"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="ExtraFoodName" destination="whc-vG-vv9" id="CQa-4w-qu1"/>
@@ -230,9 +230,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URG-Lw-rML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1620.5" y="-1318.5"/>
+            <point key="canvasLocation" x="1570.5" y="-1318.5"/>
         </scene>
-        <!--Food Request-->
+        <!--Food List-->
         <scene sceneID="G7h-u1-Q4e">
             <objects>
                 <tableViewController id="ZKI-mp-ire" customClass="FoodRequestTableViewController" customModule="Food_Saver" customModuleProvider="target" sceneMemberID="viewController">
@@ -321,13 +321,8 @@
                             <outlet property="delegate" destination="ZKI-mp-ire" id="pQW-zR-xFv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Food Request" id="vhx-LT-3DN">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="kjY-ES-pNP">
-                            <connections>
-                                <action selector="logoutPressed:" destination="ZKI-mp-ire" id="Cg7-qL-K1z"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Map" id="eTC-Ss-1NS">
+                    <navigationItem key="navigationItem" title="Food List" id="vhx-LT-3DN">
+                        <barButtonItem key="rightBarButtonItem" image="map_marker-32.png" id="eTC-Ss-1NS">
                             <connections>
                                 <action selector="mapButtonPressed:" destination="ZKI-mp-ire" id="Zpa-eD-eN1"/>
                                 <segue destination="NOG-KU-ggX" kind="show" identifier="mapSegue" id="GPx-Xu-5LJ"/>
@@ -338,12 +333,11 @@
                     <connections>
                         <outlet property="mapbuttonLabel" destination="eTC-Ss-1NS" id="7Yg-N4-UNs"/>
                         <segue destination="Q15-xc-PaC" kind="show" identifier="foodDetailSegue" id="HOO-jT-iuk"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="logoutSegue" id="FlL-vM-ANC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="je6-Ab-aIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1675.5" y="-210.5"/>
+            <point key="canvasLocation" x="1570.5" y="-454.5"/>
         </scene>
         <!--Food Detail View Controller-->
         <scene sceneID="mB5-oQ-bGq">
@@ -471,18 +465,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="direction.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Vfz-jN-qrc">
                                 <rect key="frame" x="309" y="523" width="46" height="45"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNm-EU-Xwo">
-                                <rect key="frame" x="313" y="530" width="39" height="31"/>
-                                <connections>
-                                    <action selector="directionsButtonPressed:" destination="Q15-xc-PaC" eventType="touchUpInside" id="bEQ-RS-ZTy"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="call33.png" translatesAutoresizingMaskIntoConstraints="NO" id="O2E-fc-d3l">
                                 <rect key="frame" x="243" y="581" width="116" height="29"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="descrption.png" translatesAutoresizingMaskIntoConstraints="NO" id="D04-xW-VIQ">
                                 <rect key="frame" x="20" y="399" width="30" height="29"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNm-EU-Xwo">
+                                <rect key="frame" x="316" y="531" width="32" height="32"/>
+                                <connections>
+                                    <action selector="directionsButtonPressed:" destination="Q15-xc-PaC" eventType="touchUpInside" id="bEQ-RS-ZTy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -506,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCH-cw-xG9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2495.5" y="-1126.5"/>
+            <point key="canvasLocation" x="2755.5" y="-1190.5"/>
         </scene>
         <!--Direction View Controller-->
         <scene sceneID="1Ok-pd-kug">
@@ -568,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="slP-vd-67S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3920.5" y="-1031.5"/>
+            <point key="canvasLocation" x="3824.5" y="-1190.5"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="o3H-6t-0M6">
@@ -596,7 +590,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="caO-CH-FdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2993.5" y="-210.5"/>
+            <point key="canvasLocation" x="2755.5" y="-314.5"/>
         </scene>
         <!--My Food Detail View Controller-->
         <scene sceneID="WXN-ML-79U">
@@ -632,22 +626,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRt-Iu-c9Z">
-                                <rect key="frame" x="68" y="407" width="61" height="30"/>
-                                <state key="normal" title="Available"/>
+                                <rect key="frame" x="68" y="407" width="65" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="13"/>
+                                <state key="normal" title="Available">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="availableButtonPressed:" destination="1B9-h4-jEu" eventType="touchUpInside" id="9nu-BW-Zss"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nN-bY-g3b">
-                                <rect key="frame" x="164" y="580" width="47" height="30"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="editButtonPressed:" destination="1B9-h4-jEu" eventType="touchUpInside" id="YYU-H8-gCv"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRE-bq-DJL">
-                                <rect key="frame" x="301" y="407" width="41" height="30"/>
-                                <state key="normal" title="Taken"/>
+                                <rect key="frame" x="298" y="407" width="65" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="13"/>
+                                <state key="normal" title="Taken">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="takenButtonPressed:" destination="1B9-h4-jEu" eventType="touchUpInside" id="0hN-Of-08c"/>
                                 </connections>
@@ -678,8 +673,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXw-B8-qJO">
-                                <rect key="frame" x="185" y="407" width="55" height="30"/>
-                                <state key="normal" title="Blocked"/>
+                                <rect key="frame" x="179" y="407" width="65" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="13"/>
+                                <state key="normal" title="Blocked">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="blockedButtonPressed:" destination="1B9-h4-jEu" eventType="touchUpInside" id="3Pg-AA-DRn"/>
                                 </connections>
@@ -720,6 +719,17 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hm1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bpq-0J-9xl">
                                 <rect key="frame" x="16" y="499" width="32" height="30"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nN-bY-g3b">
+                                <rect key="frame" x="133" y="581" width="109" height="30"/>
+                                <color key="backgroundColor" red="0.77254901960784317" green="0.35294117647058826" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="16"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="editButtonPressed:" destination="1B9-h4-jEu" eventType="touchUpInside" id="YYU-H8-gCv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -743,7 +753,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="32S-1V-tqJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2958.5" y="623.5"/>
+            <point key="canvasLocation" x="2755.5" y="487.5"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="2dQ-LZ-Qcs">
@@ -755,21 +765,21 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tabBar>
                     <connections>
-                        <segue destination="mV3-v6-IZK" kind="relationship" relationship="viewControllers" id="gFD-ls-mvV"/>
                         <segue destination="T9W-Bv-30G" kind="relationship" relationship="viewControllers" id="hkD-Mq-28v"/>
+                        <segue destination="mV3-v6-IZK" kind="relationship" relationship="viewControllers" id="gFD-ls-mvV"/>
                         <segue destination="ZuQ-tS-eT1" kind="relationship" relationship="viewControllers" id="jpg-OJ-fza"/>
                         <segue destination="X17-RJ-sQH" kind="relationship" relationship="viewControllers" id="MVG-T5-p1m"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1q-L7-GOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250.5" y="273.5"/>
+            <point key="canvasLocation" x="26.5" y="-8.5"/>
         </scene>
-        <!--Share-->
+        <!--New Share-->
         <scene sceneID="WCX-FA-VuK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T9W-Bv-30G" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Share" selectedImage="blk.png" id="Kya-5l-CJg"/>
+                    <tabBarItem key="tabBarItem" title="New Share" image="waiter-25.png" id="Kya-5l-CJg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="bg1.png" id="dIC-o8-UF5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -782,13 +792,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E9s-5c-v0r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1067.8125" y="-1317.7816901408451"/>
+            <point key="canvasLocation" x="894.5" y="-1318.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Food List-->
         <scene sceneID="k4W-UW-5uy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mV3-v6-IZK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="1NC-C6-25w"/>
+                    <tabBarItem key="tabBarItem" title="Food List" image="list-25.png" id="1NC-C6-25w"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6LR-8G-4Vl">
@@ -802,9 +812,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZ0-Ly-GCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135.3125" y="-209.68309859154925"/>
+            <point key="canvasLocation" x="894.5" y="-454.5"/>
         </scene>
-        <!--My Request-->
+        <!--My Shares-->
         <scene sceneID="I7A-Zz-uYR">
             <objects>
                 <tableViewController id="pGW-OI-1Se" customClass="MyRequestTableViewController" customModule="Food_Saver" customModuleProvider="target" sceneMemberID="viewController">
@@ -866,6 +876,7 @@
                                 <connections>
                                     <outlet property="expiryLabel" destination="vbf-sF-hD0" id="G78-WD-529"/>
                                     <outlet property="foodName" destination="kpl-6b-VOO" id="4jH-Lv-JZe"/>
+                                    <outlet property="myDescription" destination="91Z-Ja-oH5" id="jp9-p3-lTE"/>
                                     <outlet property="myStatusImage" destination="BVV-fz-nO1" id="tRU-zf-RaD"/>
                                     <outlet property="postedImage" destination="QAJ-sc-c1e" id="kgK-PY-K6F"/>
                                     <outlet property="servesLabel" destination="ezp-KJ-nco" id="G8l-ud-BRX"/>
@@ -878,7 +889,7 @@
                             <outlet property="delegate" destination="pGW-OI-1Se" id="ekh-fK-tys"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Request" id="t7c-hY-p9R"/>
+                    <navigationItem key="navigationItem" title="My Shares" id="t7c-hY-p9R"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="1B9-h4-jEu" kind="show" identifier="myFoodDetailSegue" id="t4u-Ys-MrK"/>
@@ -886,13 +897,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pg2-hY-bOD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869.5" y="624.5"/>
+            <point key="canvasLocation" x="1601.5" y="520.5"/>
         </scene>
-        <!--My List-->
+        <!--My Shares-->
         <scene sceneID="pap-XK-vED">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZuQ-tS-eT1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My List" selectedImage="blk.png" id="vxQ-MJ-B5I"/>
+                    <tabBarItem key="tabBarItem" title="My Shares" image="user_male_circle-25.png" id="vxQ-MJ-B5I"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wu6-Wl-glv">
@@ -906,9 +917,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ks9-Fl-cs4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135.3125" y="624.82394366197184"/>
+            <point key="canvasLocation" x="894.5" y="520.5"/>
         </scene>
-        <!--Settings-->
+        <!--About-->
         <scene sceneID="eg3-NK-5VV">
             <objects>
                 <viewController id="fv3-Mo-zGi" customClass="SettingsViewController" customModule="Food_Saver" customModuleProvider="target" sceneMemberID="viewController">
@@ -919,20 +930,34 @@
                     <view key="view" contentMode="scaleToFill" id="Lgk-xC-9C7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luy-W1-lr2">
+                                <rect key="frame" x="20" y="241" width="335" height="374"/>
+                                <mutableString key="text">Around the globe today, 795 million people do not get enough food to lead a normal and active life. This translates to more than 10% of worlds’ population of 7.38 billion. On the other hand, roughly one-third of food products gets lost or wasted globally, which is about 1.3 billion ton per annum.
+
+The "Food Share" app is an avenue for restaurant owners, party hosts and individuals who are willing to donate meals or food items to homeless shelters/orphanages and individuals in need. Every little bit counts and your contribution can make a huge difference to somebody.</mutableString>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="about.png" translatesAutoresizingMaskIntoConstraints="NO" id="CsG-bE-aVR">
+                                <rect key="frame" x="20" y="98" width="335" height="162"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="4QA-6t-K91"/>
+                    <navigationItem key="navigationItem" title="About" id="4QA-6t-K91"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmc-GW-8uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1995.9375" y="1461.4436619718304"/>
+            <point key="canvasLocation" x="1601.5" y="1459.5"/>
         </scene>
-        <!--Settings-->
+        <!--About-->
         <scene sceneID="fGV-f4-GaX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X17-RJ-sQH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" selectedImage="blk.png" id="0EX-uz-Wgl"/>
+                    <tabBarItem key="tabBarItem" title="About" image="about-25.png" id="0EX-uz-Wgl"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VVL-dl-UfH">
@@ -946,21 +971,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5j5-QG-agj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707.8125" y="1483.6267605633802"/>
+            <point key="canvasLocation" x="894.5" y="1459.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="Final Green.png" width="414" height="736"/>
+        <image name="about-25.png" width="25" height="25"/>
+        <image name="about.png" width="976" height="387"/>
         <image name="bg1.png" width="375" height="667"/>
-        <image name="blk.png" width="375" height="667"/>
         <image name="call33.png" width="299" height="72"/>
         <image name="cntct.png" width="128" height="160"/>
         <image name="descrption.png" width="123" height="161"/>
         <image name="direction.jpg" width="225" height="225"/>
         <image name="hm1.jpg" width="225" height="225"/>
         <image name="hourglass.png" width="512" height="512"/>
+        <image name="list-25.png" width="25" height="25"/>
+        <image name="map_marker-32.png" width="32" height="32"/>
         <image name="mbg2.png" width="375" height="667"/>
         <image name="noimage.jpg" width="216" height="216"/>
         <image name="phone.jpg" width="224" height="225"/>
+        <image name="user_male_circle-25.png" width="25" height="25"/>
+        <image name="waiter-25.png" width="25" height="25"/>
     </resources>
 </document>

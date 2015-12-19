@@ -52,9 +52,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         fdtitle.removeAll(keepCapacity: true)
         
         for var i = 0; i < alllatitude.count; i++ {
-            print(i)
-            print("locaions count - " + String(alllatitude.count))
-            print("foodname count - " + String(foodname.count))
+           // print(i)
+           // print("locaions count - " + String(alllatitude.count))
+           // print("foodname count - " + String(foodname.count))
             
             allLocations.append(CLLocationCoordinate2DMake(alllatitude[i], alllongitude[i]))
             fdtitle.append(foodname[i])

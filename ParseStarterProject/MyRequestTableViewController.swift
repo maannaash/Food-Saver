@@ -170,6 +170,7 @@ class MyRequestTableViewController: UITableViewController {
         mycell.foodName.text = myfoodname[indexPath.row]
         mycell.servesLabel.text = "Serves " + myserves[indexPath.row]
         mycell.statusLabel.text = String(mystatus[indexPath.row])
+        mycell.myDescription.text = myfdescription[indexPath.row]
         
         
         let calendar = NSCalendar.currentCalendar()

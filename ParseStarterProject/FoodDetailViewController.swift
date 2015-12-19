@@ -141,8 +141,8 @@ override func viewDidLoad() {
     
     // Do any additional setup after loading the view.
     
-    print(currentIndex)
-    print(postedAt)
+   // print(currentIndex)
+   // print(postedAt)
     
     
     let formatter = NSDateFormatter()

@@ -57,8 +57,8 @@ class directionViewController: UIViewController, CLLocationManagerDelegate  {
         let srcplcmrk = MKPlacemark(coordinate: srcloc, addressDictionary: nil)
         //var sourceMapItem = MKMapItem(placemark: srcplcmrk)
         
-        print(userLatitude)
-        print(userLongitude)
+       // print(userLatitude)
+       // print(userLongitude)
         let destloc:CLLocationCoordinate2D = CLLocationCoordinate2DMake(alllatitude[currentIndex], alllongitude[currentIndex])
         let destplcmrk = MKPlacemark(coordinate: destloc, addressDictionary: nil)
         let destMapItem = MKMapItem(placemark: destplcmrk)
@@ -158,6 +158,19 @@ class directionViewController: UIViewController, CLLocationManagerDelegate  {
     
 
     
+    /*
+    
+    
+    Mayuri Indian Restaurant, 1407 N Veterans Pkwy
+    Bloomington, IL 61704
+    40.499066, -88.951521
+
+
+
+
+
+
+    */
     
     /*
     // MARK: - Navigation
